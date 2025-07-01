@@ -8,15 +8,60 @@
   <meta name="keywords" content="Super Sus, SuperSus game, online multiplayer, social deduction, play online" />
   <link rel="canonical" href="https://kkhhn.online/" />
   <link rel="icon" href="/favicon.ico" />
+  
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENHSVKW1XD"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ENHSVKW1XD');
+  </script>
+  
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom loading animation */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+    .loading-spinner {
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      border-top: 4px solid #007bff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 
 <body class="bg-white text-gray-800 font-sans">
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-spinner"></div>
+  </div>
+
   <!-- Header -->
   <header class="bg-blue-600 text-white py-6 shadow-md">
     <div class="container mx-auto px-4 text-center">
       <h1 class="text-4xl font-bold">Play Super Sus Online</h1>
       <p class="text-lg mt-2">Join the ultimate social deduction game directly in your browser – no download needed!</p>
+      <button onclick="scrollToGame()" class="mt-6 bg-white text-blue-600 font-semibold px-6 py-3 rounded-full hover:bg-gray-100 transition">
+        🎮 Start Game
+      </button>
     </div>
   </header>
 
@@ -34,20 +79,22 @@
     <section class="mb-10">
       <h2 class="text-2xl font-semibold text-gray-900 mb-4">How to Play</h2>
       <p class="text-gray-700 leading-relaxed">
-        Once the game starts, players are randomly assigned roles. Crewmates must complete tasks and avoid getting eliminated, while impostors must blend in and sabotage the mission. Use voice chat, voting, and deduction to expose the impostors before it’s too late.
+        Once the game starts, players are randomly assigned roles. Crewmates must complete tasks and avoid getting eliminated, while impostors must blend in and sabotage the mission. Use voice chat, voting, and deduction to expose the impostors before it's too late.
       </p>
     </section>
 
-    <!-- Play Now -->
-    <section class="mb-10">
+    <!-- Play Now Section -->
+    <section id="game-section" class="mb-10">
       <h2 class="text-2xl font-semibold text-gray-900 mb-4">Play Now</h2>
       <div class="relative pb-[56.25%] h-0 overflow-hidden rounded-xl shadow-xl">
         <iframe
+          id="gameIframe"
           src="https://www.miniplay.com/game/super-sus"
           title="Super Sus Online Game"
           frameborder="0"
           allowfullscreen
           class="absolute top-0 left-0 w-full h-full"
+          onload="hideLoading()"
         ></iframe>
       </div>
     </section>
@@ -69,5 +116,17 @@
   <footer class="bg-gray-100 text-center text-gray-500 text-sm py-6">
     &copy; 2025 kkhhn.online — All rights reserved.
   </footer>
+
+  <!-- Scroll to Game Function -->
+  <script>
+    function scrollToGame() {
+      document.getElementById('game-section').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Hide loading overlay once iframe is fully loaded
+    function hideLoading() {
+      document.getElementById('loadingOverlay').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
